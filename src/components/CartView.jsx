@@ -1,27 +1,35 @@
-import { useEffect, useState } from "react";
-import { getProducts } from "../services/productService";
+import React from 'react'
 
 export const CartView = () => {
-
-    const [products, setProducts] = useState([]);
-    useEffect(
-        () => {
-            setProducts(getProducts());
-        }, []);
-
     return (
         <>
-            <div className="row">
-                {products.map((product) => (
-                    <div className="col-4 my-2" key={product.id}>
-                        <CartItem
-                            name={product.name}
-                            description={product.description}
-                            price={product.price}
-                        />
-                    </div>
-                ))}
-            </div>
+            <h3>Carrito de Compras</h3>
+            <table className="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>nombre</td>
+                        <td>precio</td>
+                        <td>cantidad</td>
+                        <td>total</td>
+                        <td>eliminar</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colSpan="3" className="text-end fw-bold">Total Carrito:</td>
+                        <td colSpan="2" className="text-start fw-bold">1000€</td>
+                    </tr>
+                </tfoot>
+            </table>
         </>
-    );
-};
+    )
+}
