@@ -1,20 +1,29 @@
+import { useState } from "react";
 import { CartView } from "./components/CartView";
 import { CatalogView } from "./components/CatalogView";
+
+const initialItems = [
+    // {
+    //     product: {},
+    //     quantity: 0,
+    //     total: 0    
+    // }
+]
+
 export const CartApp = () => {
 
-
-    return(
+    const [ cartItems, setCartItems ] = useState(initialItems);
+    return (
         <>
-        
-        <div>
-            
-            <h3>Cart App</h3>
-            <CatalogView/>
+            <div>
 
-            <div className="my-4 w-50">
-                <CartView />
+                <h3>Cart App</h3>
+                <CatalogView />
+
+                <div className="my-4 w-50">
+                    <CartView cartItems={cartItems} />
+                </div>
             </div>
-        </div>
         </>
     )
 }
