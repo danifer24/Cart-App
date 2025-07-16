@@ -1,9 +1,10 @@
 import React from 'react'
 
-export const ProductCardView = ({ id, name, description, price }) => {
+export const ProductCardView = ({ handler, id, name, description, price }) => {
 
     const onAddToCart = (product) => {
         console.log("Producto añadido al carrito:", product);
+        handler(product);
     }
 
     return (

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getProducts } from "../services/productService";
 import { ProductCardView } from "./ProductCardView";
 
-export const CatalogView = () => {
+export const CatalogView = ({ handler }) => {
 
     const [products, setProducts] = useState([]);
     useEffect(
@@ -21,6 +21,7 @@ export const CatalogView = () => {
                             name={product.name}
                             description={product.description}
                             price={product.price}
+                            handler={handler}
                         />
                     </div>
                 ))}
