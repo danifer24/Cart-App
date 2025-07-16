@@ -13,6 +13,11 @@ const initialItems = [
 export const CartApp = () => {
 
     const [ cartItems, setCartItems ] = useState(initialItems);
+
+    const addToCart = (product) => {
+
+    }
+    
     return (
         <>
             <div>

@@ -14,8 +14,10 @@ export const CatalogView = () => {
         <>
             <div className="row">
                 {products.map((product) => (
-                    <div className="col-4 my-2" key={product.id}>
+                    <div className="col-4 my-2" 
+                    key={product.id}>
                         <ProductCardView
+                            id={product.id}
                             name={product.name}
                             description={product.description}
                             price={product.price}
