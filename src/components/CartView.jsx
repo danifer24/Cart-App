@@ -1,6 +1,11 @@
 import React from 'react'
 
-export const CartView = ({ cartItems }) => {
+export const CartView = ({ handlerDelete, cartItems }) => {
+
+    const onDeleteProduct = (id) => {
+        handlerDelete(id);
+    }
+
     return (
         <>
             <h3>Carrito de Compras</h3>
@@ -21,7 +26,7 @@ export const CartView = ({ cartItems }) => {
                             <td>{item.product.price}</td>
                             <td>{item.quantity}</td>
                             <td>{item.quantity * item.product.price}</td>
-                            <td>eliminar</td>
+                            <td><button className='btn btn-danger' onClick={() => onDeleteProduct(item.product.id)}>Eliminar</button></td>
                         </tr>
                     ))}
 
