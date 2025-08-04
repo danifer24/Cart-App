@@ -6,8 +6,8 @@ export const CartView = ({ handlerDelete, cartItems }) => {
     const [total, setTotal] = useState(0);
 
     useEffect(() => {
-        setTotal(
-            calculateTotal(cartItems));
+        setTotal(calculateTotal(cartItems));
+        sessionStorage.setItem('cartTotal', JSON.stringify(cartItems));
     }, [cartItems])
 
     const onDeleteProduct = (id) => {
