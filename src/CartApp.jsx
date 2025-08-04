@@ -1,37 +1,41 @@
-import { useState } from "react";
+import { useReducer } from "react";
 import { CartView } from "./components/CartView";
 import { CatalogView } from "./components/CatalogView";
+import { itemsReducer } from "./reducer/itemsReducer";
 
 const initialItems = JSON.parse(sessionStorage.getItem('cartTotal')) || [];
 
 export const CartApp = () => {
-    console.log(initialItems);
-    const [cartItems, setCartItems] = useState(initialItems);
+
+    const [cartItems, dispatch] = useReducer(itemsReducer, initialItems);
 
     const addToCart = (product) => {
         const hasItem = cartItems.find((i) => i.product.id === product.id)
         if (hasItem) {
-            setCartItems(
-                cartItems.map((i) => {
-                    if (i.product.id === product.id) {
-                        i.quantity = i.quantity + 1;
-                    }
-                    return i;
-                })
-            )
+            dispatch(
+                {
+                    type: 'UpdateQuantityProductCart',
+                    payload: product,
+                }
+            );
         } else {
-            setCartItems([...cartItems, {
-                product,
-                quantity: 1,
-            }]);
+            dispatch(
+                {
+                    type: 'AddProductCart',
+                    payload: product,
+                }
+            );
         }
 
     }
 
-    const handlerDeleteProduct = (id) => {
-        setCartItems([
-            ...cartItems.filter((i) => i.product.id !== id)
-        ])
+    const DeleteProduct = (id) => {
+        dispatch(
+            {
+                type: 'DeleteProductCart',
+                payload: id,
+            }
+        )
     }
 
     return (
@@ -44,7 +48,7 @@ export const CartApp = () => {
                 {cartItems?.length <= 0 ||
                     (
                         <div className="my-4 w-50">
-                            <CartView cartItems={cartItems} handlerDelete={handlerDeleteProduct} />
+                            <CartView cartItems={cartItems} handlerDelete={DeleteProduct} />
                         </div>
                     )}
 
