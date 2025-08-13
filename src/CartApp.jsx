@@ -1,47 +1,12 @@
-import { useEffect, useReducer } from "react";
 import { CartView } from "./components/CartView";
 import { CatalogView } from "./components/CatalogView";
-import { itemsReducer } from "./reducer/itemsReducer";
-import { AddProductCart, DeleteProductCart, UpdateQuantityProductCart } from "./reducer/itemsActions";
+import { useItemsCart } from "./hooks/useItemsCart";
 
-const initialItems = JSON.parse(sessionStorage.getItem('cartTotal')) || [];
+
 
 export const CartApp = () => {
 
-    const [cartItems, dispatch] = useReducer(itemsReducer, initialItems);
-
-    useEffect(() => {
-            sessionStorage.setItem('cartTotal', JSON.stringify(cartItems));
-        }, [cartItems]);
-
-    const addToCart = (product) => {
-        const hasItem = cartItems.find((i) => i.product.id === product.id)
-        if (hasItem) {
-            dispatch(
-                {
-                    type: UpdateQuantityProductCart,
-                    payload: product,
-                }
-            );
-        } else {
-            dispatch(
-                {
-                    type: AddProductCart,
-                    payload: product,
-                }
-            );
-        }
-
-    }
-
-    const DeleteProduct = (id) => {
-        dispatch(
-            {
-                type: DeleteProductCart,
-                payload: id,
-            }
-        )
-    }
+    const { cartItems, addToCart, deleteProduct } = useItemsCart();
 
     return (
         <>
@@ -53,7 +18,7 @@ export const CartApp = () => {
                 {cartItems?.length <= 0 ||
                     (
                         <div className="my-4 w-50">
-                            <CartView cartItems={cartItems} handlerDelete={DeleteProduct} />
+                            <CartView cartItems={cartItems} handlerDelete={deleteProduct} />
                         </div>
                     )}
 
