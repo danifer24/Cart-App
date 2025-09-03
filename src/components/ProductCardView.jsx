@@ -1,10 +1,14 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
 export const ProductCardView = ({ handler, id, name, description, price }) => {
+
+    const navigate = useNavigate();
 
     const onAddToCart = (product) => {
         console.log("Producto añadido al carrito:", product);
         handler(product);
+        navigate('/cart');
     }
 
     return (
