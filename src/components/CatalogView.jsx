@@ -5,9 +5,14 @@ import { ProductCardView } from "./ProductCardView";
 export const CatalogView = ({ handler }) => {
 
     const [products, setProducts] = useState([]);
+    const findAll = async() => {
+        const productsBackend = await getProducts();
+        setProducts(productsBackend);
+    }
+
     useEffect(
         () => {
-            setProducts(getProducts());
+            findAll();
         }, []);
 
     return (
